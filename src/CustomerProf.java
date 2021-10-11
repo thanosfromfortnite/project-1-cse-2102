@@ -20,6 +20,10 @@ public class CustomerProf {
 	
 	// methods
 	// getter methods
+	public String getAdminID() {
+		return adminID;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
