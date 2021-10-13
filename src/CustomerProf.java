@@ -62,6 +62,9 @@ public class CustomerProf {
 	public void updatePhone(String str) {
 		phone = str;
 	}
+	public void updateUse(String str) {
+		use = str;
+	}
 	public void updateIncome(float newIncome) {
 		income = newIncome;
 	}

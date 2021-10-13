@@ -2,11 +2,15 @@ import java.util.*;
 public class CustomerProfDB  {
     private List<CustomerProf> profiles;
     private int profileCounter;
+    private int numCustomers;
+    String filename;
 
     public CustomerProfDB(String filename) {
         profiles = new ArrayList<>();
         profileCounter = 0;
+        this.filename = filename;
         initializeDB(filename);
+        numCustomers = profiles.size();
     }
 
     public void initializeDB(String filename) {
@@ -15,6 +19,7 @@ public class CustomerProfDB  {
 
     public void insertNewProfile(CustomerProf insert) {
         profiles.add(insert);
+        numCustomers ++;
     }
 
     public CustomerProf findProfile(String adminID, String lastName) {
@@ -33,6 +38,7 @@ public class CustomerProfDB  {
         }
         else {
             profiles.remove(x);
+            numCustomers --;
             return true;
         }
     }
@@ -48,13 +54,18 @@ public class CustomerProfDB  {
         if (profiles.isEmpty()) {
             return null;
         }
-        if (profileCounter < profiles.size()) {
+        if (profileCounter < numCustomers) {
             CustomerProf output = profiles.get(profileCounter);
             profileCounter ++;
             return output;
         }
         return null;
     }
+
+    public void writeAllCustomerProf() {
+
+    }
+
 
 
 }
