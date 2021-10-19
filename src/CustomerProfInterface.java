@@ -1,11 +1,12 @@
+import java.io.FileNotFoundException;
 import java.util.*;
 public class CustomerProfInterface {
     private String fileName;
     private CustomerProfDB database;
 
-    public CustomerProfInterface(String fileName) {
+    public CustomerProfInterface(String fileName) throws FileNotFoundException {
         this.fileName = fileName;
-        database = new CustomerProfDB(fileName);
+        database = new CustomerProfDB(this.fileName);
     }
 
     public void getUserChoice() {
