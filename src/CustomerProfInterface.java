@@ -173,4 +173,8 @@ public class CustomerProfInterface {
                 update.getVehicleInfo().updateMethod(scan.nextLine());
         }
     }
+    
+    public void displayCustomerProf() {
+    	
+    }
 }
