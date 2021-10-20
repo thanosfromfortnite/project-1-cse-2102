@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 public class CustomerProfInterface {
     private String fileName;
@@ -9,7 +10,7 @@ public class CustomerProfInterface {
         database = new CustomerProfDB(this.fileName);
     }
 
-    public void getUserChoice() {
+    public void getUserChoice() throws IOException {
         System.out.println("What is your admin ID?");
         Scanner scan = new Scanner(System.in);
         String id = scan.nextLine(); // input for ID
@@ -37,6 +38,12 @@ public class CustomerProfInterface {
             case "4":
                 // customer prof modifications
                 updateCustomerProf();
+            case "5":
+                // display all profiles
+                displayAllCustomerProf();
+            case "6":
+                // write to database
+                writeToDB();
         }
     }
 
@@ -173,8 +180,21 @@ public class CustomerProfInterface {
                 update.getVehicleInfo().updateMethod(scan.nextLine());
         }
     }
-    
-    public void displayCustomerProf() {
-    	
+
+    public void displayAllCustomerProf() {
+        System.out.println("Please write the ID:");
+        Scanner scan = new Scanner(System.in);
+        String adminID = scan.nextLine();
+
+        CustomerProf current = database.findNextProfile();
+        while (current != null) {
+            if (current.getAdminID().equals(adminID)) {
+                displayCustomerProf(current);
+            }
+        }
+    }
+
+    public void writeToDB() throws IOException {
+        database.writeAllCustomerProf();
     }
 }

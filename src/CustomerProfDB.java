@@ -74,6 +74,7 @@ public class CustomerProfDB {
         if (profiles.isEmpty()) {
             return null;
         }
+
         return profiles.get(0);
     }
 
