@@ -10,41 +10,48 @@ public class CustomerProfInterface {
         database = new CustomerProfDB(this.fileName);
     }
 
-    public void getUserChoice() throws IOException {
+    public boolean getUserChoice() throws IOException {
         System.out.println("What is your admin ID?");
         Scanner scan = new Scanner(System.in);
         String id = scan.nextLine(); // input for ID
-
+        
+        System.out.println("Using ID " + id);
+        
         System.out.println("Here are your choices:\n" +
                 "1. Enter a New CustomerProf\n" +
                 "2. Delete a customer by Name and adminID\n" +
                 "3. Find and display a CustomerProf by name and adminID\n" +
                 "4. CustomerProf Modifications\n" +
                 "5. Display all profiles\n" +
-                "6. Write to database\n");
+                "6. Write to database\n" +
+                "0. Exit\n");
 
         String choice = scan.nextLine();
-
-        switch (choice) {
-            case "1":
-                // enter a new customer profile
-                database.insertNewProfile(createNewCustomerProf());
-            case "2":
-                // delete customer profile
-                deleteCustomerProf();
-            case "3":
-                // find profile
-                findCustomerProf();
-            case "4":
-                // customer prof modifications
-                updateCustomerProf();
-            case "5":
-                // display all profiles
-                displayAllCustomerProf();
-            case "6":
-                // write to database
-                writeToDB();
-        }
+        
+        
+        
+        
+        if (choice.equals("1"))
+            // enter a new customer profile
+            database.insertNewProfile(createNewCustomerProf());
+        else if (choice.equals("2"))
+            // delete customer profile
+            deleteCustomerProf();
+        else if (choice.equals("3"))
+            // find profile
+            findCustomerProf();
+        else if (choice.equals("4"))
+            // customer prof modifications
+            updateCustomerProf();
+        else if (choice.equals("5"))
+            // display all profiles
+            displayAllCustomerProf();
+        else if (choice.equals("6"))
+            // write to database
+            writeToDB();
+        if (choice.equals("0"))
+        	return false;
+        return true;
     }
 
     public CustomerProf createNewCustomerProf() {
@@ -72,8 +79,11 @@ public class CustomerProfInterface {
 
         System.out.println("Please write the income:");
         float income = scan.nextFloat();
+        
+        VehicleInfo vehicle = createNewVehicleInfo();
+        
 
-        return new CustomerProf(adminID, firstName, lastName, address, phone, income, status, use, createNewVehicleInfo());
+        return new CustomerProf(adminID, firstName, lastName, address, phone, income, status, use, vehicle);
 
     }
 
@@ -90,6 +100,8 @@ public class CustomerProfInterface {
 
         System.out.println("Please write the method of obtaining:");
         String method = scan.nextLine();
+        
+        
 
         return new VehicleInfo(model, year, type, method);
     }
@@ -101,8 +113,12 @@ public class CustomerProfInterface {
 
         System.out.println("Please write the admin ID:");
         String adminID = scan.nextLine();
+        
+        
 
-        boolean success = database.deleteProfile(lastName, adminID);
+        boolean success = database.deleteProfile(adminID, lastName);
+        
+        
         if (success)
             System.out.println("Successfully deleted profile.");
         else
@@ -116,8 +132,10 @@ public class CustomerProfInterface {
 
         System.out.println("Please write the admin ID:");
         String adminID = scan.nextLine();
+        
+        
 
-        CustomerProf found = database.findProfile(lastName, adminID);
+        CustomerProf found = database.findProfile(adminID, lastName);
         if (found == null)
             System.out.println("Could not find profile.");
         else
@@ -125,10 +143,10 @@ public class CustomerProfInterface {
     }
 
     public void displayCustomerProf(CustomerProf input) {
-        System.out.printf("Name: %s %s\nAddress: %s\nPhone Number: %s\n, Status: %s\n Use: %s\n Income: %f\n",
+        System.out.printf("Name: %s %s\nAddress: %s\nPhone Number: %s\nStatus: %s\nUse: %s\nIncome: %f\n",
                 input.getFirstName(), input.getLastName(), input.getAddress(), input.getPhone(), input.getStatus(), input.getUse(), input.getIncome());
         VehicleInfo vehicle = input.getVehicleInfo();
-        System.out.printf("Vehicle Model: %s\nVehicle Type: %s\nMethod of obtaining: %s\n Year of production: %s\n",
+        System.out.printf("Vehicle Model: %s\nVehicle Type: %s\nMethod of obtaining: %s\nYear of production: %s\n\n",
                 vehicle.getModel(), vehicle.getType(), vehicle.getMethod(), vehicle.getYear());
     }
 
@@ -152,7 +170,7 @@ public class CustomerProfInterface {
                 "7. Vehicle Type\n" +
                 "8. Vehicle Method of Obtaining\n");
         String choice = scan.nextLine();
-
+        
         switch (choice) {
             case "1":
                 System.out.println("Enter new address:");
@@ -179,19 +197,23 @@ public class CustomerProfInterface {
                 System.out.println("Enter new vehicle method:");
                 update.getVehicleInfo().updateMethod(scan.nextLine());
         }
+        
     }
 
     public void displayAllCustomerProf() {
         System.out.println("Please write the ID:");
         Scanner scan = new Scanner(System.in);
         String adminID = scan.nextLine();
-
+        
+        
         CustomerProf current = database.findNextProfile();
         while (current != null) {
             if (current.getAdminID().equals(adminID)) {
                 displayCustomerProf(current);
             }
+            current = database.findNextProfile();
         }
+        
     }
 
     public void writeToDB() throws IOException {

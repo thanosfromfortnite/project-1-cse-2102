@@ -6,6 +6,18 @@ public class CustomerProf {
 	private float income;
 	
 	// constructor
+	public CustomerProf(String adminID, String firstName, String lastName, String address, String phone, String income, String status, String use, VehicleInfo vehicleInfo) {
+		this.adminID = adminID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phone = phone;
+		this.status = status;
+		this.use = use;
+		this.income = Float.parseFloat(income);
+		this.vehicleInfo = vehicleInfo;
+	}
+	// overloaded constructor, if an actual float is passed in
 	public CustomerProf(String adminID, String firstName, String lastName, String address, String phone, float income, String status, String use, VehicleInfo vehicleInfo) {
 		this.adminID = adminID;
 		this.firstName = firstName;

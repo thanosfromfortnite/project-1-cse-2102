@@ -17,7 +17,10 @@ public class CustomerProfDB {
     public void initializeDB(String filename) throws FileNotFoundException {
     	Scanner scan = new Scanner(new File(filename));
     	while (scan.hasNextLine()) { // while there is still data left to be read in the file
+    		
+    		
     		String[] vars = scan.nextLine().split(",");
+    		
     		// creates an array of all of the values separated by commas in the file.
     		// this assumes the file is formatted correctly 
     		CustomerProf newCustomer = new CustomerProf(
@@ -26,7 +29,7 @@ public class CustomerProfDB {
     				vars[2], // last name
     				vars[3], // address
     				vars[4], // phone number
-    				Float.parseFloat(vars[5]), // income (float)
+    				vars[5], // income (float)
     				vars[6], // status
     				vars[7], // use
     				new VehicleInfo(
@@ -87,6 +90,7 @@ public class CustomerProfDB {
             profileCounter ++;
             return output;
         }
+        profileCounter = 0;
         return null;
     }
 
@@ -117,6 +121,7 @@ public class CustomerProfDB {
     		
     		fw.write(output); // writes the output to the file
     	}
+    	
     	fw.close();
     }
 
