@@ -97,11 +97,14 @@ public class CustomerProfDB {
     public void writeAllCustomerProf() throws IOException {
     	FileWriter fw = new FileWriter(fileName);
     	File file = new File(fileName);
+    	
     	// THIS WILL CLEAR THE FILE before writing to it again!
 		if (file.exists() && file.isFile()) {
 			file.delete();
 		}
 		file.createNewFile();
+		
+		PrintStream fileStream = new PrintStream(file);
 		
     	for (CustomerProf i: profiles) {
     		String output = ""; // creates a string to compile all of the data into a CSV format
@@ -119,7 +122,7 @@ public class CustomerProfDB {
     		output += i.getVehicleInfo().getMethod();
     		
     		
-    		fw.write(output); // writes the output to the file
+    		fileStream.println(output); // writes the output to the file
     	}
     	
     	fw.close();
