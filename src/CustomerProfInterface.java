@@ -158,44 +158,55 @@ public class CustomerProfInterface {
         System.out.println("Please write the admin ID:");
         String adminID = scan.nextLine();
 
-        CustomerProf update = database.findProfile(lastName, adminID);
-
-        System.out.println("Please select which one to modify:\n" +
-                "1. Address\n" +
-                "2. Phone\n" +
-                "3. Use\n" +
-                "4. Status\n" +
-                "5. Vehicle Model\n" +
-                "6. Vehicle Year\n" +
-                "7. Vehicle Type\n" +
-                "8. Vehicle Method of Obtaining\n");
-        String choice = scan.nextLine();
+        CustomerProf update = database.findProfile(adminID, lastName);
         
-        switch (choice) {
-            case "1":
+        if (update == null)
+        	System.out.println("Could not find profile.");
+        else {
+        	System.out.printf("Modifying %s %s: \n", update.getFirstName(), update.getLastName());
+	        System.out.println("Please select which one to modify:\n" +
+	                "1. Address\n" +
+	                "2. Phone\n" +
+	                "3. Use\n" +
+	                "4. Status\n" +
+	                "5. Vehicle Model\n" +
+	                "6. Vehicle Year\n" +
+	                "7. Vehicle Type\n" +
+	                "8. Vehicle Method of Obtaining\n");
+	        String choice = scan.nextLine();
+	        
+            if (choice.equals("1")) {
                 System.out.println("Enter new address:");
                 update.updateAddress(scan.nextLine());
-            case "2":
+            }
+            else if (choice.equals("2")) {
                 System.out.println("Enter new phone number:");
                 update.updatePhone(scan.nextLine());
-            case "3":
+            }
+            else if (choice.equals("3")) {
                 System.out.println("Enter new use:");
                 update.updateUse(scan.nextLine());
-            case "4":
+            }
+            else if (choice.equals("4")) {
                 System.out.println("Enter new status:");
                 update.updateStatus(scan.nextLine());
-            case "5":
+            }
+            else if (choice.equals("5")) {
                 System.out.println("Enter new vehicle model:");
                 update.getVehicleInfo().updateModel(scan.nextLine());
-            case "6":
+            }
+            else if (choice.equals("6")) {
                 System.out.println("Enter new vehicle year:");
                 update.getVehicleInfo().updateYear(scan.nextLine());
-            case "7":
+            }
+            else if (choice.equals("7")) {
                 System.out.println("Enter new vehicle type:");
                 update.getVehicleInfo().updateType(scan.nextLine());
-            case "8":
+            }
+            else if (choice.equals("8")) {
                 System.out.println("Enter new vehicle method:");
                 update.getVehicleInfo().updateMethod(scan.nextLine());
+	        }
         }
         
     }

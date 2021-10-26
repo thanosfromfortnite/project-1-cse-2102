@@ -53,7 +53,7 @@ public class CustomerProfDB {
     }
 
     public CustomerProf findProfile(String adminID, String lastName) {
-        for (CustomerProf i: profiles) {
+        for (CustomerProf i: profiles) { // iterate through whole list, return i if found, otherwise return null
             if (i.getAdminID().equals(adminID) && i.getLastName().equals(lastName)) {
                 return i;
             }
@@ -85,17 +85,17 @@ public class CustomerProfDB {
         if (profiles.isEmpty()) {
             return null;
         }
-        if (profileCounter < numCustomers) {
+        if (profileCounter < numCustomers) { // as long as there are still profiles, iterate through, otherwise return null
             CustomerProf output = profiles.get(profileCounter);
             profileCounter ++;
             return output;
         }
-        profileCounter = 0;
+        profileCounter = 0; // this happens when the end is reached, and at that point, reset the counter
+        System.out.println("Reached the end of the list.");
         return null;
     }
 
     public void writeAllCustomerProf() throws IOException {
-    	FileWriter fw = new FileWriter(fileName);
     	File file = new File(fileName);
     	
     	// THIS WILL CLEAR THE FILE before writing to it again!
@@ -125,7 +125,7 @@ public class CustomerProfDB {
     		fileStream.println(output); // writes the output to the file
     	}
     	
-    	fw.close();
+    	fileStream.close();
     }
 
 
