@@ -71,13 +71,35 @@ public class CustomerProfInterface {
         System.out.println("Please write the phone number:");
         String phone = scan.nextLine();
 
-        System.out.println("Please write the status:");
+        System.out.println("Please write the status: 1. Active, 2. Inactive");
         String status = scan.nextLine();
+        
+        while (!status.equals("1") && !status.equals("2")) {
+        	 System.out.println("Please write the status: 1. Active, 2. Inactive");
+             status = scan.nextLine();
+        }
+        
+        if (status.equals("1"))
+        	status = "Active";
+        else
+        	status = "Inactive";
 
-        System.out.println("Please write the use:");
+        System.out.println("Please write the use: 1. Business, 2. Personal, 3. Both");
         String use = scan.nextLine();
+        
+        while (!use.equals("1") && !use.equals("2") && !use.equals("3")) {
+        	System.out.println("Please write the use: 1. Business, 2. Personal, 3. Both");
+            use = scan.nextLine();
+       }
+       
+        if (use.equals("1"))
+        	status = "Business";
+       	else if (use.equals("2"))
+       		status = "Personal";
+       	else
+       		status = "Both";
 
-        System.out.println("Please write the income:");
+        System.out.println("Please write the income (numbers only):");
         float income = scan.nextFloat();
         
         VehicleInfo vehicle = createNewVehicleInfo();
@@ -184,12 +206,55 @@ public class CustomerProfInterface {
                 update.updatePhone(scan.nextLine());
             }
             else if (choice.equals("3")) {
-                System.out.println("Enter new use:");
-                update.updateUse(scan.nextLine());
+            	
+            	System.out.println(
+                		"Enter new use:\n" +
+                		"1. Business\n" +
+                		"2. Personal\n" +
+                		"3. Both\n");
+                
+                String newUse = scan.nextLine();
+                
+                while (!newUse.equals("1") && !newUse.equals("2") && !newUse.equals("3")) {
+                	System.out.println(
+                    		"Enter new use:\n" +
+                    		"1. Business\n" +
+                    		"2. Personal\n" +
+                    		"3. Both\n");
+                	newUse = scan.nextLine();
+                }
+                
+                if (newUse.equals("1")) {
+                    update.updateUse("Business");
+                }
+                else if (newUse.equals("2")) {
+                	update.updateUse("Personal");
+                }
+                else {
+                	update.updateUse("Both");
+                }
             }
             else if (choice.equals("4")) {
-                System.out.println("Enter new status:");
-                update.updateStatus(scan.nextLine());
+                System.out.println(
+                		"Enter new status:\n" +
+                		"1. Active\n" +
+                		"2. Inactive\n");
+                String newStatus = scan.nextLine();
+                
+                while (!newStatus.equals("1") && !newStatus.equals("2")) {
+                	System.out.println(
+                    		"Enter new status:\n" +
+                    		"1. Active\n" +
+                    		"2. Inactive\n");
+                	newStatus = scan.nextLine();
+                }
+                
+                if (newStatus.equals("1")) {
+                    update.updateStatus("Active");
+                }
+                else if (newStatus.equals("2")) {
+                	update.updateStatus("Inactive");
+                }
             }
             else if (choice.equals("5")) {
                 System.out.println("Enter new vehicle model:");
