@@ -1,2 +1,3 @@
 adminID,first,last,address,phone,1234.0,status,use,model,year,type,method
 sussybaka123,Jesse,Han,UConn,123-456-7890,5000000.0,Active,Personal,Fun,2005,Sedan,New
+abc123,Neil,Armstrong,Space,444444444,5000000.0,Both,3,NASA Shuttle,1970,Space Shuttle,NASA built it

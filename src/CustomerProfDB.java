@@ -54,7 +54,7 @@ public class CustomerProfDB {
 
     public CustomerProf findProfile(String adminID, String lastName) {
         for (CustomerProf i: profiles) { // iterate through whole list, return i if found, otherwise return null
-            if (i.getAdminID().equals(adminID) && i.getLastName().equals(lastName)) {
+            if (i.getAdminID().toLowerCase().equals(adminID.toLowerCase()) && i.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
                 return i;
             }
         }
