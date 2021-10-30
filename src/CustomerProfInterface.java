@@ -71,6 +71,9 @@ public class CustomerProfInterface {
         System.out.println("Please write the phone number:");
         String phone = scan.nextLine();
 
+        System.out.println("Please write the income (numbers only):");
+        float income = Float.parseFloat(scan.nextLine());
+        
         System.out.println("Please write the status: 1. Active, 2. Inactive");
         String status = scan.nextLine();
         
@@ -93,14 +96,11 @@ public class CustomerProfInterface {
        }
        
         if (use.equals("1"))
-        	status = "Business";
+        	use = "Business";
        	else if (use.equals("2"))
-       		status = "Personal";
+       		use = "Personal";
        	else
-       		status = "Both";
-
-        System.out.println("Please write the income (numbers only):");
-        float income = scan.nextFloat();
+       		use = "Both";
         
         VehicleInfo vehicle = createNewVehicleInfo();
         
@@ -113,15 +113,46 @@ public class CustomerProfInterface {
         System.out.println("Please write the model:");
         Scanner scan = new Scanner(System.in);
         String model = scan.nextLine();
-
-        System.out.println("Please write the type:");
-        String type = scan.nextLine();
-
+        
         System.out.println("Please write the year:");
         String year = scan.nextLine();
 
-        System.out.println("Please write the method of obtaining:");
+        System.out.println("Please write the type of vehicle: 1. Sedan, 2. Hatchback, 3. Luxury, 4. Sport, 5. Other");
+        String type = scan.nextLine();
+        
+        while (!type.equals("1") && !type.equals("2") && !type.equals("3") && !type.equals("4") && !type.equals("5")) {
+        	System.out.println("Please write the type of vehicle: 1. Sedan, 2. Hatchback, 3. Luxury, 4. Sport, 5. Other");
+            type = scan.nextLine();
+       }
+        
+        if (type.equals("1"))
+        	type = "Sedan";
+        else if (type.equals("2"))
+        	type = "Hatchback";
+        else if (type.equals("3"))
+        	type = "Luxury";
+        else if (type.equals("4"))
+        	type = "Sport";
+        else if (type.equals("5"))
+        	type = "Other";
+
+
+        System.out.println("Please write the method of obtaining: 1. New, 2. Certified Pre-owned, 3. Used, 4. Other");
         String method = scan.nextLine();
+        
+        while (!method.equals("1") && !method.equals("2") && !method.equals("3") && !method.equals("4")) {
+        	System.out.println("Please write the method of obtaining: 1. New, 2. Certified Pre-owned, 3. Used, 4. Other");
+            method = scan.nextLine();
+       }
+        
+        if (method.equals("1"))
+        	method = "New";
+        else if (method.equals("2"))
+        	method = "Certified Pre-owned";
+        else if (method.equals("3"))
+        	method = "Used";
+        else if (method.equals("4"))
+        	method = "Other";
         
         
 
